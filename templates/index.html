@@ -7,20 +7,52 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+
     <div class="main-container">
-        <div class="logo-wrapper">
-            <img src="{{ url_for('static', filename='estrella.png') }}" class="star-bg">
-            <h1 class="brand-title">MRMEER</h1>
+        
+        <button class="menu-btn-open" onclick="toggleMenu()">☰</button>
+
+        <div class="content-wrapper">
+            <div class="logo-wrapper">
+                <img src="{{ url_for('static', filename='estrellameer-pag1.png') }}" class="star-bg" alt="Estrella Fondo">
+                <h1 class="brand-title">MRMEER</h1>
+            </div>
+
+            <div class="info-text">
+                <p>✨ Comida callejera para todos,<br>abierto de sol a luna 🌙</p>
+            </div>
+
+            <div class="button-group">
+                <a href="#" class="btn">CARTA</a>
+                <a href="#" class="btn">PEDIR ONLINE</a>
+            </div>
         </div>
 
-        <div class="info-text">
-            <p>✨ Comida callejera para todos,<br>abierto de sol a luna 🌙</p>
+        <div class="footer-links">
+            <a href="https://www.facebook.com/" target="_blank">Facebook</a> |
+            <a href="https://www.instagram.com/" target="_blank">Instagram</a> |
+            <a href="{{ url_for('contacto') }}">Contacto</a>
         </div>
 
-        <div class="button-group">
-            <a href="#" class="btn">CARTA</a>
-            <a href="#" class="btn">PEDIR ONLINE</a>
+        <div id="fullScreenMenu" class="overlay-menu">
+            <button class="menu-btn-close" onclick="toggleMenu()">×</button>
+            
+            <div class="overlay-content">
+                <a href="/" onclick="toggleMenu()">INICIO</a>
+                <a href="/productos" onclick="toggleMenu()">PRODUCTOS</a>
+                <a href="/contacto" onclick="toggleMenu()">CONTACTO</a>
+                <a href="#" onclick="toggleMenu()">MI CUENTA</a>
+            </div>
         </div>
+
     </div>
+
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("fullScreenMenu");
+            // Usamos una clase "active" para manejar la animación
+            menu.classList.toggle("active");
+        }
+    </script>
 </body>
 </html>
