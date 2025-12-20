@@ -9,10 +9,22 @@
 <body>
 
     <div class="main-container">
-        
-        <button class="menu-btn-open" onclick="toggleMenu()">☰</button>
+        <div class="header-bar">
+            <div class="spacer"></div>
+            <button class="menu-btn-open" onclick="toggleMenu()">☰</button>
+            
+        </div>
 
-        <div class="content-wrapper">
+        <div id="fullScreenMenu" class="overlay-menu">
+            <button class="menu-btn-close" onclick="toggleMenu()">×</button>
+            <div class="overlay-content">
+                <a href="/" onclick="toggleMenu()">INICIO</a>
+                <a href="/productos" onclick="toggleMenu()">PRODUCTOS</a>
+                <a href="/contacto" onclick="toggleMenu()">CONTACTO</a>
+                <a href="#" onclick="toggleMenu()">MI CUENTA</a>
+            </div>
+        </div>
+        <div class="section-inicio content-wrapper">
             <div class="logo-wrapper">
                 <img src="{{ url_for('static', filename='estrellameer-pag1.png') }}" class="star-bg" alt="Estrella Fondo">
                 <h1 class="brand-title">MRMEER</h1>
@@ -27,30 +39,23 @@
                 <a href="#" class="btn">PEDIR ONLINE</a>
             </div>
         </div>
-
+        <div class="section-nosotros">
+            <h2>Sobre Nosotros</h2>
+            <p>Aquí va la frase del local...</p>
+        </div>
+        <div class="section-colaborar">
+            <h3>¿Quieres ser parte del equipo?</h3>
+            <button class="btn">Enviar CV</button>
+        </div>
         <div class="footer-links">
             <a href="https://www.facebook.com/" target="_blank">Facebook</a> |
             <a href="https://www.instagram.com/" target="_blank">Instagram</a> |
             <a href="{{ url_for('contacto') }}">Contacto</a>
         </div>
-
-        <div id="fullScreenMenu" class="overlay-menu">
-            <button class="menu-btn-close" onclick="toggleMenu()">×</button>
-            
-            <div class="overlay-content">
-                <a href="/" onclick="toggleMenu()">INICIO</a>
-                <a href="/productos" onclick="toggleMenu()">PRODUCTOS</a>
-                <a href="/contacto" onclick="toggleMenu()">CONTACTO</a>
-                <a href="#" onclick="toggleMenu()">MI CUENTA</a>
-            </div>
-        </div>
-
-    </div>
-
+        </div> 
     <script>
         function toggleMenu() {
             var menu = document.getElementById("fullScreenMenu");
-            // Usamos una clase "active" para manejar la animación
             menu.classList.toggle("active");
         }
     </script>
