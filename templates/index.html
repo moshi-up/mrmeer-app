@@ -24,7 +24,7 @@
                 <a href="#" onclick="toggleMenu()">MI CUENTA</a>
             </div>
         </div>
-        <div class="section-inicio content-wrapper">
+        <div class="section-inicio-content-wrapper">
             <div class="logo-wrapper">
                 <img src="{{ url_for('static', filename='estrellameerpng-pag1.png') }}" class="star-bg" alt="Estrella Fondo">
                 <h1 class="brand-title">MRMEER</h1>
@@ -38,6 +38,7 @@
                 <a href="https://menu.fu.do/mr.meer/qr-menu" class="btn">CARTA</a>
                 <a href="https://menu.fu.do/mr.meer" class="btn">PEDIR ONLINE</a>
             </div>
+            <hr class="linea-bonita-section-inicio">
         </div>
         <div class="section-nosotros">
             <div class="video-section">
@@ -58,6 +59,7 @@
                     </video>
 
                 </div>
+
             </div>
 
             <div class="legend-content">
@@ -69,13 +71,62 @@
                 </h2>
                 <img src="{{ url_for('static', filename='estrellameerpng-pag1.png') }}" class="legend-logo" alt="Logo">
             </div>
+                <hr class="linea-bonita-nosotros">
 
            
 
         </div>
         <div class="section-colaborar">
-            <h3>¿Quieres ser parte del equipo?</h3>
-            <button class="btn">Enviar CV</button>
+            <div class="colab-header">
+                <h2 class="colab-title">
+                    Unete a la familia <span class="text-gold">Mr.Meer</span> ✨
+                </h2>
+                <p class="colab-subtitle">
+                    Ya una lista de <strong>influencers</strong> han<br>
+                    colaborado con nosotros
+                </p>
+                <p class="colab-cta">¡Contactanos!</p>
+            </div>
+
+            <div class="influencer-scroll">
+                
+                <div class="influencer-card">
+                    <img src="{{ url_for('static', filename='foto-agus.jpg') }}" alt="Agustin" class="inf-img">
+                    <div class="inf-info">
+                        <span class="inf-name">Agustin</span>
+                        <span class="inf-handle">@agustinelsucio</span>
+                    </div>
+                </div>
+
+                <div class="influencer-card">
+                    <img src="{{ url_for('static', filename='foto_aaaa.jpg') }}" alt="Mau" class="inf-img">
+                    <div class="inf-info">
+                        <span class="inf-name">Mau</span>
+                        <span class="inf-handle">@aaaa.mau</span>
+                    </div>
+                </div>
+
+                <div class="influencer-card">
+                    <img src="{{ url_for('static', filename='otakin.png') }}" alt="Otakin" class="inf-img">
+                    <div class="inf-info">
+                        <span class="inf-name">Otakin</span>
+                        <span class="inf-handle">@otakingordo</span>
+                    </div>
+                </div>
+
+                <div class="influencer-card">
+                    <img src="{{ url_for('static', filename='doncarter.png') }}" alt="Otro" class="inf-img">
+                    <div class="inf-info">
+                        <span class="inf-name">DON CARTER</span>
+                        <span class="inf-handle">@CARTER</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="colab-footer">
+                <button class="btn-cv">🌟 Envianos tu curriculum</button>
+            </div>
         </div>
         <div class="footer-links">
             <a href="https://www.facebook.com/" target="_blank">Facebook</a> |
@@ -118,6 +169,30 @@
             if(videos.length > 0) {
                 videos[0].play();
             }
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            const contenedor = document.querySelector('.main-container');
+            const seccionNosotros = document.querySelector('.section-nosotros');
+
+            const observerOptions = {
+                root: contenedor, // Vigilamos el scroll DENTRO del celular
+                threshold: 0.5   // Se activa cuando el 20% de la sección "Nosotros" es visible
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Si "Nosotros" es visible -> Ponemos modo claro
+                        contenedor.classList.add('modo-claro');
+                    } else {
+                        // Si "Nosotros" NO es visible -> Quitamos modo claro (vuelve a negro)
+                        contenedor.classList.remove('modo-claro');
+                    }
+                });
+            }, observerOptions);
+
+            observer.observe(seccionNosotros);
         });
     </script>
 </body>

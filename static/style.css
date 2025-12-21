@@ -3,18 +3,19 @@ body {
     margin: 0;
     padding: 0;
     background-color: #121212;
-    display: -webkit-box;
-    min-height: 220vh;
+    display: block;
+    min-height: 100vh;
     font-family: 'Arial', sans-serif;
+    overflow: hidden;
 }
 
 /* 2. Contenedor Celular (El marco) */
 .main-container {
     background-color: #1a1a1a;
-    width: auto; /* Ancho típico de móvil */
-    height: auto;
+    width: 100%; /* Ancho típico de móvil */
+    height: 100vh;
     max-width: none;
-    min-height: 700px;
+    min-height: auto;
     border-radius: 0;
     position: relative; /* Clave para posicionar cosas adentro */
     overflow: hidden;   /* Para que nada se salga de los bordes redondos */
@@ -23,6 +24,11 @@ body {
     box-shadow: none;
     overflow-y: auto;
     justify-content: flex-start;
+    transition: background-color 0.8s ease; /* Esto hace que el cambio de color tarde 0.8 segundos y se vea suave */
+}
+
+.main-container.modo-claro {
+    background-color: #ffffff !important; /* Fuerza el color blanco */
 }
 
 /* 3. Botón Menú (Hamburguesa) */
@@ -49,6 +55,18 @@ body {
     box-sizing: border-box; /* Incluye padding en el ancho */
 }
 
+.section-inicio-content-wrapper {
+    flex-grow: 1; /* Ocupa todo el espacio disponible */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+    padding: 0px 20px 20px 20px;
+    box-sizing: border-box; /* Incluye padding en el ancho */
+}
+
 /* Logo y Estrella */
 .logo-wrapper {
     width: 100%;
@@ -63,8 +81,20 @@ body {
     width: 80px;
     height: auto;
     display: block;
+    filter: drop-shadow(0px 0px 1px rgb(82, 78, 78));
 }
 
+.legend-logo
+{
+    position: sticky;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: auto;
+      filter: drop-shadow(0px 0px 1px black);
+
+}
 .brand-title {
     position: relative;
     z-index: 2;
@@ -73,6 +103,7 @@ body {
     font-weight: bold;
     margin: 0;
     letter-spacing: -2px;
+    display:inline-block ;
 }
 
 /* Textos */
@@ -85,10 +116,32 @@ body {
 
 /* Botones Principales */
 .button-group {
-    display: flex;
-    gap: 15px;
+    display: inline-flex;
+    gap: 43px;
     z-index: 3;
     margin-top: auto;
+    padding-bottom: 250px;
+}
+
+/* Estilo para la línea separadora */
+.linea-bonita-section-inicio {
+    width: 75%;              /* Ocupa 3/4 del ancho (75%) */
+    height: 2px;             /* Grosor de la línea (fino y elegante) */
+    background-color: white; /* Color blanco */
+    border: none;            /* Quitamos el borde 3D feo que trae por defecto */
+    border-radius: 5px;      /* Puntas redondeadas (el toque "bonito") */
+    margin: 40px auto 0;     /* 40px de espacio arriba, y "auto" la centra */
+    opacity: 0.4;            /* Un poco transparente para que se vea sofisticada */
+}
+
+.linea-bonita-nosotros {
+    width: 75%;              /* Ocupa 3/4 del ancho (75%) */
+    height: 2px;             /* Grosor de la línea (fino y elegante) */
+    background-color: rgb(0, 0, 0); /* Color blanco */
+    border: none;            /* Quitamos el borde 3D feo que trae por defecto */
+    border-radius: 5px;      /* Puntas redondeadas (el toque "bonito") */
+    margin: 40px auto 0;     /* 40px de espacio arriba, y "auto" la centra */
+    opacity: 0.4;            /* Un poco transparente para que se vea sofisticada */
 }
 
 .btn {
@@ -194,7 +247,7 @@ body {
 .section-nosotros {
     padding: 0;
     text-align: left;
-    background-color: #ffffff;
+    background-color: transparent;
     padding-bottom: 40px;
     border-top: 1px solid #333;
 }
@@ -271,4 +324,132 @@ body {
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+
+/* ---------------------------------------------------- */
+/* SECCIÓN COLABORAR (RULETA INFLUENCERS)               */
+/* ---------------------------------------------------- */
+
+.section-colaborar {
+    padding: 40px 0;
+    text-align: center;
+    /* Al ser transparente, dejará ver el fondo NEGRO del body (que regresa al salir de 'Nosotros') */
+    background-color: transparent; 
+    color: white;
+    border-top: 1px solid #333;
+}
+
+/* 1. Títulos y Textos */
+.colab-header {
+    margin-bottom: 30px;
+    padding: 0 20px;
+}
+
+.colab-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.text-gold {
+    color: #fca311; /* Color dorado/naranja tipo Mr.Meer */
+}
+
+.colab-subtitle {
+    color: #ccc;
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.colab-cta {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* 2. El Contenedor de la Ruleta (Scroll Horizontal) */
+.influencer-scroll {
+    display: flex;            /* Pone las cartas en fila */
+    overflow-x: auto;         /* Permite scroll horizontal */
+    gap: 15px;                /* Espacio entre cartas */
+    padding: 0 25px 40px 25px;/* Padding lateral y abajo */
+    
+    /* EFECTO IMÁN (SNAP) */
+    scroll-snap-type: x mandatory; 
+}
+
+/* Ocultar la barra de scroll fea */
+.influencer-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* 3. Las Cartas Individuales */
+.influencer-card {
+    min-width: 220px;         /* Ancho fijo de cada carta */
+    scroll-snap-align: center;/* Se alinean al centro al soltar */
+    text-align: left;         /* Texto alineado a la izquierda */
+    display: flex;
+    flex-direction: column;
+}
+
+.inf-img {
+    width: 100%;
+    height: 320px;            /* Altura vertical de la foto */
+    object-fit: cover;        /* Recorta la foto para llenar el espacio */
+    border-radius: 10px;      /* Bordes suaves pero no redondos */
+    filter: brightness(0.9);  /* Un pelín oscuras para estilo */
+    transition: filter 0.3s;
+}
+
+/* Efecto al tocar la foto */
+.influencer-card:active .inf-img {
+    filter: brightness(1.1);
+}
+
+.inf-info {
+    margin-top: 10px;
+    padding-left: 5px;
+}
+
+.inf-name {
+    display: block;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: white;
+}
+
+.inf-handle {
+    display: block;
+    color: #bbb;
+    font-size: 0.85rem;
+    margin-top: 2px;
+}
+
+/* 4. Botón Curriculum */
+.colab-footer {
+    margin-top: 20px;
+    padding: 0 20px;
+}
+
+.btn-cv {
+    background-color: #f2f0f7; /* Blanco grisáceo */
+    color: black;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;       /* Forma de píldora */
+    font-weight: bold;
+    font-size: 1rem;
+    width: 100%;               /* Botón ancho */
+    max-width: 300px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255,255,255,0.1);
+    transition: transform 0.2s;
+}
+
+.btn-cv:active {
+    transform: scale(0.98);    /* Efecto de presión */
 }
