@@ -2,7 +2,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #000000;
+    background-color: #121212;
     display: flex;
     justify-content: flex-start;
     min-height: 100vh;
@@ -182,3 +182,89 @@ body {
     padding: 0 0px;          /* Un poco de aire a los lados */
     box-sizing: border-box; /* Fondo semitransparente */
 }  
+
+/* ---------------------------------------------------- */
+/* NUEVA SECCIÓN: NOSOTROS (ESTILO EDITORIAL + SLIDESHOW) */
+/* ---------------------------------------------------- */
+
+.section-nosotros {
+    padding: 0;
+    text-align: left;
+    background-color: #ffffff;
+    padding-bottom: 40px;
+    border-top: 1px solid #333;
+}
+
+/* 1. Estilos de la Foto Principal */
+.hero-card {
+    width: 100%;
+    padding: 20px 20px 0 20px;
+    box-sizing: border-box;
+}
+
+.hero-img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+/* 2. Estilos del Texto "Leyenda" */
+.legend-content { padding: 20px 25px; }
+
+.legend-title {
+    color: rgb(0, 0, 0);
+    font-size: 2.2rem;
+    font-weight: 800; /* Extra negrita */
+    line-height: 1.1;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+}
+
+.legend-logo { height: 40px; width: auto; display: block; }
+
+/* 3. Estilos del SLIDESHOW de Videos (El cambio importante) */
+.video-section {
+    margin-top: 10px;
+    padding: 0 25px;
+}
+
+.video-label {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* El marco del televisor */
+.video-slideshow-container {
+    width: 100%;
+    height: 400px; /* Altura fija vertical */
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+/* Los videos están ocultos por defecto (display: none) */
+.auto-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Llena todo el espacio sin deformarse */
+    display: none;
+}
+
+/* Solo se muestra el video que el JavaScript marque como "active" */
+.auto-video.active {
+    display: block;
+    animation: fadeIn 0.5s ease-in-out; /* Efecto suave de aparición */
+}
+
+/* Animación para que no aparezca de golpe */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

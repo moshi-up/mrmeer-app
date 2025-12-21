@@ -40,8 +40,38 @@
             </div>
         </div>
         <div class="section-nosotros">
-            <h2>Sobre Nosotros</h2>
-            <p>Aquí va la frase del local...</p>
+            <div class="video-section">
+                <h3 class="video-label">VIBES DE LA COCINA 🔥</h3>
+                
+                <div class="video-slideshow-container">
+                    
+                    <video class="auto-video active" muted playsinline>
+                        <source src="{{ url_for('static', filename='video.mp4') }}" type="video/mp4">
+                    </video>
+
+                    <video class="auto-video" muted playsinline>
+                        <source src="{{ url_for('static', filename='video (2).mp4') }}" type="video/mp4">
+                    </video>
+
+                    <video class="auto-video" muted playsinline>
+                        <source src="{{ url_for('static', filename='video (1).mp4') }}" type="video/mp4">
+                    </video>
+
+                </div>
+            </div>
+
+            <div class="legend-content">
+                <h2 class="legend-title">
+                    Más que un ✨<br>
+                    restaurante o un bar,<br>
+                    somos una leyenda<br>
+                    local.
+                </h2>
+                <img src="{{ url_for('static', filename='estrellameer-pag1.png') }}" class="legend-logo" alt="Logo">
+            </div>
+
+           
+
         </div>
         <div class="section-colaborar">
             <h3>¿Quieres ser parte del equipo?</h3>
@@ -58,6 +88,37 @@
             var menu = document.getElementById("fullScreenMenu");
             menu.classList.toggle("active");
         }
+        // 2. Función del Video Automático
+        document.addEventListener("DOMContentLoaded", function() {
+            const videos = document.querySelectorAll('.auto-video');
+            let currentIndex = 0;
+
+            // Función para pasar al siguiente video
+            function playNextVideo() {
+                // Pausar y ocultar el actual
+                videos[currentIndex].classList.remove('active');
+                videos[currentIndex].pause();
+                videos[currentIndex].currentTime = 0; // Reiniciar por si vuelve a tocar
+
+                // Calcular el siguiente (si es el último, vuelve al 0)
+                currentIndex = (currentIndex + 1) % videos.length;
+
+                // Mostrar y reproducir el siguiente
+                videos[currentIndex].classList.add('active');
+                videos[currentIndex].play();
+            }
+
+            // Configurar cada video
+            videos.forEach(video => {
+                // Cuando un video termina, llama a la función playNextVideo
+                video.addEventListener('ended', playNextVideo);
+            });
+
+            // Arrancar el primer video
+            if(videos.length > 0) {
+                videos[0].play();
+            }
+        });
     </script>
 </body>
 </html>
