@@ -3,23 +3,24 @@ body {
     margin: 0;
     padding: 0;
     background-color: #121212;
-    display: flex;
-    justify-content: flex-start;
-    min-height: 100vh;
+    display: -webkit-box;
+    min-height: 220vh;
     font-family: 'Arial', sans-serif;
 }
 
 /* 2. Contenedor Celular (El marco) */
 .main-container {
     background-color: #1a1a1a;
-    width: 375px; /* Ancho típico de móvil */
-    height: 700px;
-    border-radius: 40px;
+    width: auto; /* Ancho típico de móvil */
+    height: auto;
+    max-width: none;
+    min-height: 700px;
+    border-radius: 0;
     position: relative; /* Clave para posicionar cosas adentro */
     overflow: hidden;   /* Para que nada se salga de los bordes redondos */
     display: flex;
     flex-direction: column; /* Organiza elementos verticalmente */
-    box-shadow: 0 0 30px rgba(255,255,255,0.1);
+    box-shadow: none;
     overflow-y: auto;
     justify-content: flex-start;
 }
@@ -28,12 +29,12 @@ body {
 .menu-btn-open {
     position: relative;
     background: none;
-    padding: 0px;
     border: none;
     color: white;
     font-size: 2.5rem;
     cursor: pointer;
     z-index: 10; /* Asegura que esté por encima de todo */
+    padding: 7px;
 }
 
 /* 4. Contenido Central */
@@ -44,6 +45,8 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
+    padding: 20px;
+    box-sizing: border-box; /* Incluye padding en el ancho */
 }
 
 /* Logo y Estrella */
@@ -85,6 +88,7 @@ body {
     display: flex;
     gap: 15px;
     z-index: 3;
+    margin-top: auto;
 }
 
 .btn {
@@ -173,7 +177,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
-    background-color: #1a1a1a;
+    background-color: #0c0c0c;
     width: 100%;
     height: 50px;             /* Altura de la barra */
     display: flex;            /* Para acomodar cosas adentro */
