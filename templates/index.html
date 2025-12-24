@@ -8,12 +8,11 @@
 </head>
 <body>
 
-    <div class="main-container">
+    <div class="main-container">    
+
         <div class="header-bar">
-            <div class="spacer"></div>
-            <img src="{{ url_for('static', filename='estrellameerpng-pag1.png') }}" class="header-logo" alt="Logo">
+            <h1 class="header-logo">MRMEER</h1>
             <button class="menu-btn-open" onclick="toggleMenu()">☰</button>
-            
         </div>
 
         <div id="fullScreenMenu" class="overlay-menu">
@@ -25,7 +24,9 @@
                 <a href="#" onclick="toggleMenu()">MI CUENTA</a>
             </div>
         </div>
+
         <div class="section-inicio-content-wrapper">
+            
             <div class="background-video-container">
                 <video class="bg-video active" muted playsinline>
                     <source src="{{ url_for('static', filename='video (1).mp4') }}" type="video/mp4">
@@ -38,13 +39,18 @@
             <div class="dark-overlay"></div>
 
             <div class="content-wrapper intro-content-animado">
-                
                 <div class="logo-wrapper">
                     <img src="{{ url_for('static', filename='estrellameerpng-pag1.png') }}" class="star-bg" alt="Estrella Fondo">
                     <h1 class="brand-title">MRMEER</h1>
                 </div>
 
-             
+                <div class="info-text">
+                    <p>
+                        <span class="text-main">✨ COMIDA CALLEJERA PARA TODOS</span>
+                        <br>
+                        <span class="text-sub">abierto de sol a luna 🌙</span>
+                    </p>
+                </div>
 
                 <div class="button-group">
                     <a href="https://menu.fu.do/mr.meer/qr-menu" class="btn">CARTA</a>
@@ -53,44 +59,36 @@
 
                 <hr class="linea-bonita-section-inicio">
             </div>
-
         </div>
+
         <div class="section-nosotros">
             <div class="video-section">
-                <h3 class="video-label">VIBES DE LA COCINA 🔥</h3>
-                
-                <div class="video-slideshow-container">
-                    
+                <h3 class="video-label">VIBES DE LA COCINA 🔥</h3>   
+                <div class="video-slideshow-container">      
                     <video class="auto-video active" muted playsinline>
                         <source src="{{ url_for('static', filename='video.mp4') }}" type="video/mp4">
                     </video>
-
                     <video class="auto-video" muted playsinline>
                         <source src="{{ url_for('static', filename='video (2).mp4') }}" type="video/mp4">
                     </video>
-
                     <video class="auto-video" muted playsinline>
                         <source src="{{ url_for('static', filename='video (1).mp4') }}" type="video/mp4">
                     </video>
-
                 </div>
-
             </div>
 
             <div class="legend-content">
                 <h2 class="legend-title">
                     Más que un ✨<br>
                     restaurante o un bar,<br>
-                    somos una leyenda tomécina
-                    
+                    somos una leyenda tomécina            
                 </h2>
                 <img src="{{ url_for('static', filename='mrmeernosotros.png') }}" class="legend-logo" alt="Logo">
             </div>
-                <hr class="linea-bonita-nosotros">
-
-           
-
+            
+            <hr class="linea-bonita-nosotros">
         </div>
+
         <div class="section-colaborar">
             <div class="colab-header">
                 <h2 class="colab-title">
@@ -104,7 +102,6 @@
             </div>
 
             <div class="influencer-scroll">
-                
                 <div class="influencer-card">
                     <img src="{{ url_for('static', filename='foto-agus.jpg') }}" alt="Agustin" class="inf-img">
                     <div class="inf-info">
@@ -112,7 +109,6 @@
                         <span class="inf-handle">@agustinelsucio</span>
                     </div>
                 </div>
-
                 <div class="influencer-card">
                     <img src="{{ url_for('static', filename='foto_aaaa.jpg') }}" alt="Mau" class="inf-img">
                     <div class="inf-info">
@@ -120,7 +116,6 @@
                         <span class="inf-handle">@aaaa.mau</span>
                     </div>
                 </div>
-
                 <div class="influencer-card">
                     <img src="{{ url_for('static', filename='otakin.png') }}" alt="Otakin" class="inf-img">
                     <div class="inf-info">
@@ -128,7 +123,6 @@
                         <span class="inf-handle">@otakingordo</span>
                     </div>
                 </div>
-
                 <div class="influencer-card">
                     <img src="{{ url_for('static', filename='doncarter.png') }}" alt="Otro" class="inf-img">
                     <div class="inf-info">
@@ -136,110 +130,112 @@
                         <span class="inf-handle">@CARTER</span>
                     </div>
                 </div>
-
             </div>
 
             <div class="colab-footer">
                 <button class="btn-cv">🌟 Envianos tu curriculum</button>
             </div>
         </div>
+
         <div class="footer-links">
             <a href="https://www.facebook.com/" target="_blank">Facebook</a> |
             <a href="https://www.instagram.com/" target="_blank">Instagram</a> |
             <a href="{{ url_for('contacto') }}">Contacto</a>
         </div>
-        </div> 
-    <script>
+
+    </div> <script>
+        // --- 1. Menú Overlay ---
         function toggleMenu() {
             var menu = document.getElementById("fullScreenMenu");
             menu.classList.toggle("active");
         }
-        // 2. Función del Video Automático
+
         document.addEventListener("DOMContentLoaded", function() {
+            
+            // --- 2. Videos Automáticos (Slideshow Nosotros) ---
             const videos = document.querySelectorAll('.auto-video');
             let currentIndex = 0;
 
-            // Función para pasar al siguiente video
             function playNextVideo() {
-                // Pausar y ocultar el actual
                 videos[currentIndex].classList.remove('active');
                 videos[currentIndex].pause();
-                videos[currentIndex].currentTime = 0; // Reiniciar por si vuelve a tocar
-
-                // Calcular el siguiente (si es el último, vuelve al 0)
+                videos[currentIndex].currentTime = 0;
+                
                 currentIndex = (currentIndex + 1) % videos.length;
-
-                // Mostrar y reproducir el siguiente
+                
                 videos[currentIndex].classList.add('active');
                 videos[currentIndex].play();
             }
 
-            // Configurar cada video
             videos.forEach(video => {
-                // Cuando un video termina, llama a la función playNextVideo
                 video.addEventListener('ended', playNextVideo);
             });
 
-            // Arrancar el primer video
-            if(videos.length > 0) {
-                videos[0].play();
-            }
-        });
-        document.addEventListener("DOMContentLoaded", function() {
-            
+            if(videos.length > 0) videos[0].play();
+
+
+            // --- 3. Cambio de color de Fondo (Intersection Observer) ---
             const contenedor = document.querySelector('.main-container');
             const seccionNosotros = document.querySelector('.section-nosotros');
 
             const observerOptions = {
-                root: contenedor, // Vigilamos el scroll DENTRO del celular
-                threshold: 0.5   // Se activa cuando el 20% de la sección "Nosotros" es visible
+                root: contenedor,
+                threshold: 0.5 
             };
 
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        // Si "Nosotros" es visible -> Ponemos modo claro
                         contenedor.classList.add('modo-claro');
                     } else {
-                        // Si "Nosotros" NO es visible -> Quitamos modo claro (vuelve a negro)
                         contenedor.classList.remove('modo-claro');
                     }
                 });
             }, observerOptions);
 
             observer.observe(seccionNosotros);
-        });
-        // ... (Tu código anterior del IntersectionObserver y los otros videos) ...
 
-            /* -------------------------------------------------- */
-            /* 4. LOGICA PARA VIDEOS DE FONDO (PÁGINA INICIO)     */
-            /* -------------------------------------------------- */
+
+            // --- 4. Videos de Fondo (Inicio) ---
             const bgVideos = document.querySelectorAll('.bg-video');
             let bgIndex = 0;
 
             function playNextBgVideo() {
-                // 1. Quitar clase active al actual y pausar
                 bgVideos[bgIndex].classList.remove('active');
                 bgVideos[bgIndex].pause();
                 bgVideos[bgIndex].currentTime = 0;
 
-                // 2. Calcular siguiente
                 bgIndex = (bgIndex + 1) % bgVideos.length;
 
-                // 3. Activar siguiente
                 bgVideos[bgIndex].classList.add('active');
                 bgVideos[bgIndex].play();
             }
 
-            // Configurar eventos
             bgVideos.forEach(video => {
                 video.addEventListener('ended', playNextBgVideo);
             });
 
-            // Iniciar el primero
-            if(bgVideos.length > 0) {
-                bgVideos[0].play();
-            }
+            if(bgVideos.length > 0) bgVideos[0].play();
+
+
+            // --- 5. Header Inteligente ---
+            let lastScrollTop = 0;
+            const header = document.querySelector('.header-bar');
+            
+            // Escuchamos el scroll del contenedor principal
+            contenedor.addEventListener("scroll", function() {
+                let currentScroll = contenedor.scrollTop;
+                
+                if (currentScroll > lastScrollTop && currentScroll > 50) {
+                    header.classList.add('header-hidden');
+                } else {
+                    header.classList.remove('header-hidden');
+                }
+                
+                lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; 
+            }, false);
+
+        });
     </script>
 </body>
 </html>
