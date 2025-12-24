@@ -11,6 +11,7 @@
     <div class="main-container">
         <div class="header-bar">
             <div class="spacer"></div>
+            <img src="{{ url_for('static', filename='estrellameerpng-pag1.png') }}" class="header-logo" alt="Logo">
             <button class="menu-btn-open" onclick="toggleMenu()">☰</button>
             
         </div>
@@ -25,20 +26,34 @@
             </div>
         </div>
         <div class="section-inicio-content-wrapper">
-            <div class="logo-wrapper">
-                <img src="{{ url_for('static', filename='estrellameerpng-pag1.png') }}" class="star-bg" alt="Estrella Fondo">
-                <h1 class="brand-title">MRMEER</h1>
+            <div class="background-video-container">
+                <video class="bg-video active" muted playsinline>
+                    <source src="{{ url_for('static', filename='video (1).mp4') }}" type="video/mp4">
+                </video>
+                <video class="bg-video" muted playsinline>
+                    <source src="{{ url_for('static', filename='video (2).mp4') }}" type="video/mp4">
+                </video>
             </div>
 
-            <div class="info-text">
-                <p>✨ Comida callejera para todos,<br>abierto de sol a luna 🌙</p>
+            <div class="dark-overlay"></div>
+
+            <div class="content-wrapper intro-content-animado">
+                
+                <div class="logo-wrapper">
+                    <img src="{{ url_for('static', filename='estrellameerpng-pag1.png') }}" class="star-bg" alt="Estrella Fondo">
+                    <h1 class="brand-title">MRMEER</h1>
+                </div>
+
+             
+
+                <div class="button-group">
+                    <a href="https://menu.fu.do/mr.meer/qr-menu" class="btn">CARTA</a>
+                    <a href="https://menu.fu.do/mr.meer" class="btn">PEDIR ONLINE</a>
+                </div>
+
+                <hr class="linea-bonita-section-inicio">
             </div>
 
-            <div class="button-group">
-                <a href="https://menu.fu.do/mr.meer/qr-menu" class="btn">CARTA</a>
-                <a href="https://menu.fu.do/mr.meer" class="btn">PEDIR ONLINE</a>
-            </div>
-            <hr class="linea-bonita-section-inicio">
         </div>
         <div class="section-nosotros">
             <div class="video-section">
@@ -66,10 +81,10 @@
                 <h2 class="legend-title">
                     Más que un ✨<br>
                     restaurante o un bar,<br>
-                    somos una leyenda<br>
-                    local.
+                    somos una leyenda tomécina
+                    
                 </h2>
-                <img src="{{ url_for('static', filename='estrellameerpng-pag1.png') }}" class="legend-logo" alt="Logo">
+                <img src="{{ url_for('static', filename='mrmeernosotros.png') }}" class="legend-logo" alt="Logo">
             </div>
                 <hr class="linea-bonita-nosotros">
 
@@ -79,7 +94,7 @@
         <div class="section-colaborar">
             <div class="colab-header">
                 <h2 class="colab-title">
-                    Unete a la familia <span class="text-gold">Mr.Meer</span> ✨
+                    Unete a la familia <span class="text-gold">MR.MEER</span> ✨
                 </h2>
                 <p class="colab-subtitle">
                     Ya una lista de <strong>influencers</strong> han<br>
@@ -194,6 +209,37 @@
 
             observer.observe(seccionNosotros);
         });
+        // ... (Tu código anterior del IntersectionObserver y los otros videos) ...
+
+            /* -------------------------------------------------- */
+            /* 4. LOGICA PARA VIDEOS DE FONDO (PÁGINA INICIO)     */
+            /* -------------------------------------------------- */
+            const bgVideos = document.querySelectorAll('.bg-video');
+            let bgIndex = 0;
+
+            function playNextBgVideo() {
+                // 1. Quitar clase active al actual y pausar
+                bgVideos[bgIndex].classList.remove('active');
+                bgVideos[bgIndex].pause();
+                bgVideos[bgIndex].currentTime = 0;
+
+                // 2. Calcular siguiente
+                bgIndex = (bgIndex + 1) % bgVideos.length;
+
+                // 3. Activar siguiente
+                bgVideos[bgIndex].classList.add('active');
+                bgVideos[bgIndex].play();
+            }
+
+            // Configurar eventos
+            bgVideos.forEach(video => {
+                video.addEventListener('ended', playNextBgVideo);
+            });
+
+            // Iniciar el primero
+            if(bgVideos.length > 0) {
+                bgVideos[0].play();
+            }
     </script>
 </body>
 </html>

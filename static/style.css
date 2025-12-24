@@ -43,6 +43,15 @@ body {
     padding: 7px;
 }
 
+.header-logo {
+    position: relative;
+    height: 30px;
+    width: auto;
+    margin-right: auto;
+    margin-left: 10px;
+    filter: drop-shadow(0px 0px 1px black);
+}
+
 /* 4. Contenido Central */
 .content-wrapper {
     flex-grow: 1; /* Ocupa todo el espacio disponible */
@@ -56,17 +65,107 @@ body {
 }
 
 .section-inicio-content-wrapper {
-    flex-grow: 1; /* Ocupa todo el espacio disponible */
+    position: relative;        /* Necesario para contener los videos absolutos */
+    min-height: 100vh;         /* Altura pantalla completa */
+    width: 100%;
+    overflow: hidden;          /* Que nada se salga */
+    
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    width: 100%;
-    min-height: 100vh;
-    padding: 0px 20px 20px 20px;
-    box-sizing: border-box; /* Incluye padding en el ancho */
+    align-items: center;
+    padding-bottom: 50px;
 }
 
+/* 1. CONTENEDOR DE VIDEO (Al fondo) */
+.background-video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;                /* Nivel 0 (El piso) */
+}
+
+.bg-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;         /* IMPORTANTE: Hace que el video llene la pantalla sin estirarse */
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;                /* Ocultos por defecto */
+    transition: opacity 1s ease; /* Transición suave entre videos */
+}
+
+.bg-video.active {
+    opacity: 1;                /* Solo se ve el activo */
+}
+
+/* 2. EL VELO OSCURO (La capa mágica) */
+.dark-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;   /* Color del velo */
+    z-index: 1;                /* Nivel 1 (Encima del video) */
+    
+    /* LA ANIMACIÓN */
+    opacity: 0;                /* Empieza transparente (se ve el video clarito) */
+    animation: oscurecerVideo 1.5s forwards; /* Dura 1.5s */
+    animation-delay: 0.5s;     /* Espera 0.5s antes de empezar */
+}
+
+/* 3. EL CONTENIDO (Logo y botones) */
+.intro-content-animado {
+    position: relative;
+    z-index: 2;                /* Nivel 2 (Hasta arriba) */
+    
+    /* LA ANIMACIÓN */
+    opacity: 0;                /* Empieza invisible */
+    transform: translateY(20px); /* Empieza un poquito más abajo */
+    animation: aparecerContenido 1.2s ease-out forwards;
+    animation-delay: 0.6s;     /* Espera 0.5s (mientras el video se ve claro) */
+}
+
+
+/* --- DEFINICIÓN DE LAS ANIMACIONES --- */
+
+/* Del transparente al negro semitransparente */
+@keyframes oscurecerVideo {
+    to {
+        opacity: 0.65; /* Ajusta este número: 0.5 es suave, 0.8 es muy oscuro */
+    }
+}
+
+/* Del invisible al visible subiendo un poquito */
+@keyframes aparecerContenido {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.mrmeer-copa {
+    position: relative;
+    width: 70px;
+    height: auto;
+    margin-top: -20px;
+    filter: drop-shadow(0px 0px 1px rgb(247, 247, 247));
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.mrmeer-hamburguesa {
+    position: relative;
+    width: 70px;
+    height: auto;
+    margin-top: -10px;
+    filter: drop-shadow(0px 0px 0.5px rgb(247, 247, 247));
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
 /* Logo y Estrella */
 .logo-wrapper {
     width: 100%;
@@ -81,7 +180,7 @@ body {
     width: 80px;
     height: auto;
     display: block;
-    filter: drop-shadow(0px 0px 1px rgb(82, 78, 78));
+    filter: drop-shadow(2px 4px 6px black);
 }
 
 .legend-logo
@@ -104,23 +203,44 @@ body {
     margin: 0;
     letter-spacing: -2px;
     display:inline-block ;
+    filter: drop-shadow(2px 4px 6px black);
 }
 
 /* Textos */
+/* TEXTO DE FRASE (Estilo Editorial) */
 .info-text {
-    color: #e0e0e0;
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 40px; /* Espacio antes de los botones */
     z-index: 3;
+    padding: 0 20px; /* Para que no toque los bordes en pantallas muy chicas */
 }
 
+.info-text p {
+    margin: 0;
+    line-height: 1.6; /* Un poco de aire entre las dos líneas */
+}
+
+/* Línea 1: "COMIDA CALLEJERA..." */
+
+
+/* Línea 2: "abierto de sol a luna" */
+.text-sub {
+    display: block;          /* Ocupa su propia línea */
+    color: #e2e2e2;          /* Color Dorado/Naranja (Tu color de marca) */
+    font-size: 1.5rem;       /* Un pelín más grande que la de arriba */
+    font-family: 'Arial', sans-serif;
+    font-style: italic;      /* Cursiva para el toque poético */
+    font-weight: 400;        /* Letra fina */
+    margin-top: 5px;         /* Separación sutil de la línea de arriba */
+    opacity: 0.9;
+}
 /* Botones Principales */
 .button-group {
     display: inline-flex;
     gap: 43px;
     z-index: 3;
     margin-top: auto;
-    padding-bottom: 250px;
+    padding-bottom: 230px;
 }
 
 /* Estilo para la línea separadora */
@@ -130,31 +250,56 @@ body {
     background-color: white; /* Color blanco */
     border: none;            /* Quitamos el borde 3D feo que trae por defecto */
     border-radius: 5px;      /* Puntas redondeadas (el toque "bonito") */
-    margin: 40px auto 0;     /* 40px de espacio arriba, y "auto" la centra */
+    margin: 30px auto 0;     /* 40px de espacio arriba, y "auto" la centra */
     opacity: 0.4;            /* Un poco transparente para que se vea sofisticada */
 }
 
-.linea-bonita-nosotros {
-    width: 75%;              /* Ocupa 3/4 del ancho (75%) */
-    height: 2px;             /* Grosor de la línea (fino y elegante) */
-    background-color: rgb(0, 0, 0); /* Color blanco */
-    border: none;            /* Quitamos el borde 3D feo que trae por defecto */
-    border-radius: 5px;      /* Puntas redondeadas (el toque "bonito") */
-    margin: 40px auto 0;     /* 40px de espacio arriba, y "auto" la centra */
-    opacity: 0.4;            /* Un poco transparente para que se vea sofisticada */
-}
 
+/* BOTONES PRINCIPALES (Estilo Premium) */
 .btn {
     text-decoration: none;
-    background-color: #f2f0f7;
-    color: black;
-    padding: 12px 25px;
-    border-radius: 50px;
-    font-weight: bold;
-    font-size: 0.9rem;
-    transition: transform 0.2s;
+    
+    /* 1. GEOMETRÍA DEL CÍRCULO PERFECTO */
+    width: 110px;        /* Ancho fijo */
+    height: 110px;       /* Alto IGUAL al ancho */
+    border-radius: 50%;  /* Esto lo convierte en círculo */
+    
+    /* 2. CENTRADO DEL TEXTO (Vital en círculos) */
+    display: flex;
+    justify-content: center; /* Centrado horizontal */
+    align-items: center;     /* Centrado vertical */
+    text-align: center;      /* Para que "PEDIR ONLINE" quede centrado en 2 líneas */
+    
+    /* 3. Estilos Visuales */
+    background-color: #ffffff;
+    color: #000000;
+    padding: 5px;            /* Un poco de margen interno para que el texto no toque el borde */
+    
+    /* 4. Tipografía */
+    font-size: 0.85rem;      /* Letra un poco más pequeña para que quepa */
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1.1;        /* Líneas pegaditas */
+    
+    /* 5. Efectos (Glow) */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efecto rebote */
+    user-select: none;
 }
-.btn:hover { transform: scale(1.05); }
+
+/* EFECTO AL PASAR EL MOUSE (HOVER) */
+.btn:hover {
+    background-color: #fca311;
+    color: white;
+    transform: scale(1.1) rotate(5deg); /* Crece y gira un poquito (muy divertido) */
+    box-shadow: 0 0 30px rgba(252, 163, 17, 0.6);
+    z-index: 10; /* Se pone encima si se tocan */
+}
+
+/* EFECTO AL CLIC (ACTIVE) */
+.btn:active {
+    transform: scale(0.9);
+}
 
 /* 5. Footer (Links al fondo) */
 .footer-links {
@@ -230,7 +375,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
-    background-color: #0c0c0c;
+    background-color: #1a1a1a; /* 
     width: 100%;
     height: 50px;             /* Altura de la barra */
     display: flex;            /* Para acomodar cosas adentro */
@@ -279,7 +424,13 @@ body {
     letter-spacing: -1px;
 }
 
-.legend-logo { height: 40px; width: auto; display: block; }
+.legend-logo { 
+    height: 200px; 
+    width: auto; 
+    display: block;
+    position: relative;
+    padding-top: 80px;
+ }
 
 /* 3. Estilos del SLIDESHOW de Videos (El cambio importante) */
 .video-section {
@@ -326,6 +477,17 @@ body {
     to { opacity: 1; }
 }
 
+.linea-bonita-nosotros {
+    width: 75%;              /* Ocupa 3/4 del ancho (75%) */
+    height: 2px;             /* Grosor de la línea (fino y elegante) */
+    background-color: rgb(0, 0, 0); /* Color blanco */
+    border: none;            /* Quitamos el borde 3D feo que trae por defecto */
+    border-radius: 5px;      /* Puntas redondeadas (el toque "bonito") */
+    margin: -200px auto 0;     /* 40px de espacio arriba, y "auto" la centra */
+    opacity: 0.4;            /* Un poco transparente para que se vea sofisticada */
+}
+
+
 /* ---------------------------------------------------- */
 /* SECCIÓN COLABORAR (RULETA INFLUENCERS)               */
 /* ---------------------------------------------------- */
@@ -353,7 +515,10 @@ body {
 }
 
 .text-gold {
-    color: #fca311; /* Color dorado/naranja tipo Mr.Meer */
+    color: #fca311;
+    filter: drop-shadow(0px 0px 1px black);
+
+     /* Color dorado/naranja tipo Mr.Meer */
 }
 
 .colab-subtitle {
