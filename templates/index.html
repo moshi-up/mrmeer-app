@@ -16,14 +16,18 @@
         </div>
 
         <div id="fullScreenMenu" class="overlay-menu">
-            <button class="menu-btn-close" onclick="toggleMenu()">×</button>
-            <div class="overlay-content">
-                <a href="/" onclick="toggleMenu()">INICIO</a>
-                <a href="/productos" onclick="toggleMenu()">PRODUCTOS</a>
-                <a href="/contacto" onclick="toggleMenu()">CONTACTO</a>
-                <a href="#" onclick="toggleMenu()">MI CUENTA</a>
-            </div>
-        </div>
+    <button class="menu-btn-close" onclick="toggleMenu()">×</button>
+    
+    <div class="overlay-content">
+        <a href="https://menu.fu.do/mr.meer/qr-menu" onclick="toggleMenu()">CARTA</a>
+        <a href="https://menu.fu.do/mr.meer" onclick="toggleMenu()">PEDIR ONLINE</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdixhHiH_MbuS_l4-wllnE1jyBTgmB_yiek-053_iUaiMtL2g/viewform" onclick="toggleMenu()">EVALUAR NUESTRO<br> SERVICIO</a>
+        <a href="#" onclick="toggleMenu()">TRABAJAR CON br>NOSOTROS</a>
+        <a href="https://www.google.com/maps/place/MR+MEER/@-36.6166982,-72.9580726,17z/data=!4m8!3m7!1s0x96684fda1b8f1711:0xdac5a23474987859!8m2!3d-36.6166982!4d-72.9580726!9m1!1b1!16s%2Fg%2F11f7rx1t2r?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoASAFQAw%3D%3D" onclick="toggleMenu()">RESEÑAS EN GOOGLE</a>
+    </div>
+
+    <div class="menu-footer">MRMEER.CL</div>
+</div>
 
         <div class="section-inicio-content-wrapper">
             
@@ -136,12 +140,32 @@
                 <button class="btn-cv">🌟 Envianos tu curriculum</button>
             </div>
         </div>
+        <div class="section-ubicacion">
+            
+            <h2 class="ubicacion-title">Ubicacion</h2>
+
+            <div class="ubicacion-img-wrapper">
+                <img src="{{ url_for('static', filename='fachada.webp') }}" alt="Fachada Mr Meer Tomé">
+            </div>
+
+            <div class="ubicacion-info">
+                <div class="info-row">
+                    <span class="city-name">Tomé</span>
+                    <span class="open-hours">9:00 AM - 11:30 PM</span>
+                </div>
+                <p class="address-text">Nogueira 1015</p>
+            </div>
+
+            <hr class="linea-bonita-ubicacion">
+        </div>
+    
 
         <div class="footer-links">
             <a href="https://www.facebook.com/" target="_blank">Facebook</a> |
             <a href="https://www.instagram.com/" target="_blank">Instagram</a> |
             <a href="{{ url_for('contacto') }}">Contacto</a>
         </div>
+        
 
     </div> <script>
         // --- 1. Menú Overlay ---
@@ -174,26 +198,35 @@
             if(videos.length > 0) videos[0].play();
 
 
-            // --- 3. Cambio de color de Fondo (Intersection Observer) ---
+            // --- 3. Cambio de color de Fondo (ACTUALIZADO) ---
             const contenedor = document.querySelector('.main-container');
-            const seccionNosotros = document.querySelector('.section-nosotros');
+            
+            // Seleccionamos AMBAS secciones que deben activar el fondo blanco
+            const seccionesClaras = document.querySelectorAll('.section-nosotros, .section-ubicacion');
 
             const observerOptions = {
                 root: contenedor,
-                threshold: 0.5 
+                threshold: 0.4 // Al 40% de visibilidad cambia el color
             };
 
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
+                    // Si entra en pantalla cualquiera de las secciones claras
                     if (entry.isIntersecting) {
                         contenedor.classList.add('modo-claro');
                     } else {
+                        // Aquí hay un truco: Solo quitamos el modo claro si NO estamos
+                        // viendo ninguna de las otras secciones claras.
+                        // Para simplificar tu lógica actual (toggle simple):
                         contenedor.classList.remove('modo-claro');
                     }
                 });
             }, observerOptions);
 
-            observer.observe(seccionNosotros);
+            // Activamos el observador para cada sección de la lista
+            seccionesClaras.forEach(seccion => {
+                observer.observe(seccion);
+            });
 
 
             // --- 4. Videos de Fondo (Inicio) ---
@@ -236,6 +269,10 @@
             }, false);
 
         });
+        function toggleMenu() {
+    var menu = document.getElementById("fullScreenMenu");
+    menu.classList.toggle("active");
+}
     </script>
 </body>
 </html>

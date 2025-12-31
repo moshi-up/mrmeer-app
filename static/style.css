@@ -30,7 +30,7 @@ body {
 
 /* Modo Claro (Se activa con JS) */
 .main-container.modo-claro {
-    background-color: #ffffff !important;
+    background-color: rgb(255, 248, 242) !important;
 }
 
 /* Contenido genérico centrado */
@@ -50,21 +50,20 @@ body {
 
 /* Header Flotante Inteligente */
 .header-bar {
-    position: fixed;
+    position: fixed; /* Mantiene la barra fija al scrolear */
     top: 0;
     left: 0;
     width: 100%;
     height: 60px;
-    background-color: transparent;
-    z-index: 1000;
-    
+    background-color: transparent; /* Se mantiene transparente */
+    z-index: 3000; /* NIVEL MÁXIMO: Superior al menú */
     display: flex;
     align-items: center;
-    /* CAMBIO CLAVE: space-between separa los elementos a los extremos */
     justify-content: space-between; 
     padding: 0 25px;
     box-sizing: border-box;
-    transition: transform 0.3s ease-in-out;
+    /* Eliminamos o comentamos la transición de ocultar para que no desaparezca */
+    transition: background-color 0.3s ease; 
 }
 
 .header-bar.header-hidden {
@@ -89,23 +88,27 @@ body {
     padding: 0;
     line-height: 1;
     filter: drop-shadow(2px 4px 6px black);
+    transition: transform 0.3s ease-in-out;
+}
+
+.menu-btn-open:active {
+    transform: scale(0.85); /* Se encoge un poco */
+    opacity: 0.6; /* Se pone transparente */
 }
 
 /* Menú Overlay (Pantalla Completa) */
 .overlay-menu {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.95);
-    z-index: 2000; /* Encima del header */
+    height: 100vh;
+    background-color: #121212;
+    z-index: 2000; /* CLAVE: Menor que la barra (3000) */
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     transform: translateX(100%);
-    transition: transform 0.4s ease-in-out;
+    transition: transform 0.4s cubic-bezier(0.77,0.2,0.05,1.0);
 }
 
 .overlay-menu.active {
@@ -118,21 +121,40 @@ body {
     right: 25px;
     background: none;
     border: none;
-    color: white;
     font-size: 3rem;
     cursor: pointer;
+}
+
+/* Contenido del menú alineado a la izquierda como la foto */
+.overlay-content {
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px; /* Espacio para el botón cerrar */
+    padding-left: 30px;
 }
 
 .overlay-content a {
     color: white;
     text-decoration: none;
-    font-size: 2rem;
-    margin: 15px 0;
+    font-size: 1.2rem;
+    margin: 10px -14px;
     font-weight: bold;
+    text-align: left;
+    letter-spacing: 0.5px;
     transition: color 0.3s;
-}
+    filter: drop-shadow(2px 4px 6px black);
+    padding: 17px;
+}   
 
-.overlay-content a:hover { color: #ffd700; }
+/* Texto inferior MRMEER.CL */
+.menu-footer {
+    margin-top: auto; /* Lo empuja al fondo */
+    padding: 40px 30px;
+    color: #333; /* Gris oscuro como la foto */
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
 
 /* ========================================= */
 /* 3. SECCIÓN INICIO (VIDEO FULL SCREEN)     */
@@ -462,4 +484,83 @@ body {
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+
+/* ========================================= */
+/* 8. SECCIÓN UBICACIÓN (INTEGRADA AL FLOW)  */
+/* ========================================= */
+
+.section-ubicacion {
+    /* No ponemos background-color para dejar que el JS haga la transición suave */
+    padding: 40px 25px;
+    text-align: left;
+    position: relative;
+    /* Forzamos texto negro porque el fondo se volverá blanco */
+    color: #000000; 
+    
+}
+
+.ubicacion-title {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin: 0 0 20px 0;
+    color: #000000; /* Negro puro */
+}
+
+.ubicacion-img-wrapper {
+    width: 100%;
+    margin-bottom: 25px;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.ubicacion-img-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.ubicacion-info {
+    margin-bottom: 30px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 5px;
+}
+
+.city-name {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: #000000;
+}
+
+.open-hours {
+    font-size: 0.9rem;
+    color: #444; /* Gris oscuro para contraste */
+    font-weight: 600;
+    text-align: right;
+}
+
+.address-text {
+    font-size: 1.2rem;
+    color: #333;
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+.linea-bonita-ubicacion {
+    width: 100%;
+    height: 2px;
+    background-color: #000; /* Línea negra */
+    border: none;
+    margin: 0;
+    opacity: 0.2;
 }
