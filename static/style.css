@@ -485,82 +485,216 @@ body {
     from { opacity: 0; }
     to { opacity: 1; }
 }
-
-/* ========================================= */
-/* 8. SECCIÓN UBICACIÓN (INTEGRADA AL FLOW)  */
+ /* ========================================= */
+/* 8. SECCIÓN UBICACIÓN (DISEÑO MODERNO)     */
 /* ========================================= */
 
 .section-ubicacion {
-    /* No ponemos background-color para dejar que el JS haga la transición suave */
-    padding: 40px 25px;
-    text-align: left;
+    /* Mantiene el fondo transparente para que funcione tu JS de cambio de color */
+    padding: 30px 20px 60px 20px;
     position: relative;
-    /* Forzamos texto negro porque el fondo se volverá blanco */
-    color: #000000; 
-    
+    color: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Título con estilo */
+.ubicacion-header {
+    margin-bottom: 10px;
+    padding-left: 10px;
 }
 
 .ubicacion-title {
-    font-size: 2rem;
-    font-weight: 800;
-    letter-spacing: -1px;
-    margin: 0 0 20px 0;
-    color: #000000; /* Negro puro */
+    font-size: 2.3rem;
+    font-weight: 900;
+    margin: 0;
+    color: #1a1a1a;
+    letter-spacing: -1.5px;
+    text-transform: uppercase;
+    line-height: 1;
 }
 
+.yellow-line {
+    width: 60px;
+    height: 6px;
+    background-color: #fca311; /* Tu color amarillo */
+    margin-top: 5px;
+    border-radius: 3px;
+}
+
+/* Tarjeta contenedora moderna */
+.ubicacion-card {
+    background: white;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08); /* Sombra suave y moderna */
+    transform: translateZ(0); /* Mejora rendimiento en móvil */
+}
+
+/* CONTENEDOR DE IMAGEN (La clave para que no sea gigante) */
 .ubicacion-img-wrapper {
     width: 100%;
-    margin-bottom: 25px;
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    height: 220px; /* Altura fija: No ocupará más de esto */
+    position: relative;
 }
 
 .ubicacion-img-wrapper img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover; /* Recorta la imagen para llenar el espacio sin deformar */
     display: block;
-    object-fit: cover;
+    transition: transform 0.5s ease;
 }
 
+/* Información debajo de la imagen */
 .ubicacion-info {
-    margin-bottom: 30px;
+    padding: 25px;
+    display: flex;
+    justify-content: space-between; /* Separa ciudad y horario */
+    align-items: center;
+    background: linear-gradient(to right, #fff, #fafafa);
 }
 
-.info-row {
+/* Bloque Izquierdo: Ciudad y Dirección */
+.info-details {
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 5px;
+    flex-direction: column;
+    border-left: 4px solid #fca311; /* Línea vertical amarilla */
+    padding-left: 15px;
 }
 
 .city-name {
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 800;
-    letter-spacing: -1px;
-    color: #000000;
-}
-
-.open-hours {
-    font-size: 0.9rem;
-    color: #444; /* Gris oscuro para contraste */
-    font-weight: 600;
-    text-align: right;
+    text-transform: uppercase;
+    color: #000;
+    line-height: 1;
+    margin-bottom: 5px;
 }
 
 .address-text {
-    font-size: 1.2rem;
-    color: #333;
+    font-size: 0.95rem;
+    color: #666;
     margin: 0;
-    font-weight: 600;
-    letter-spacing: -0.5px;
+    font-weight: 500;
 }
 
-.linea-bonita-ubicacion {
+/* Bloque Derecho: Horario */
+.schedule-box {
+    text-align: right;
+    background-color: #fff8e1; /* Fondo amarillo muy suave */
+    padding: 10px 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(252, 163, 17, 0.2);
+}
+
+.open-hours {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #333;
+    display: block;
+    line-height: 1.2;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #2ecc71; /* Verde "Abierto" */
+    border-radius: 50%;
+    margin-bottom: 2px;
+    box-shadow: 0 0 5px #2ecc71;
+}
+
+/* Botón Mapa Extra */
+.btn-mapa {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #1a1a1a;
+    font-weight: bold;
+    font-size: 0.9rem;
+    padding: 15px;
+    border: 2px solid #1a1a1a;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.btn-mapa:hover {
+    background-color: #fca311;
+    border-color: #fca311;
+    color: white;
+}
+
+/* --- Estilos Sección Final MRMEER --- */
+
+.footer-mrmeer {
+    background-color: #000000; /* Fondo negro */
+    color: #ffffff;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra todo horizontalmente */
+    text-align: center;
     width: 100%;
-    height: 2px;
-    background-color: #000; /* Línea negra */
-    border: none;
+    box-sizing: border-box; /* Evita que el padding rompa el ancho */
+}
+
+/* Estilo del Logo */
+.footer-logo-container {
+    margin-bottom: 25px;
+}
+
+.logo-text {
+    font-size: 2rem; /* Tamaño grande */
+    font-weight: bold;
     margin: 0;
-    opacity: 0.2;
+    letter-spacing: 1px;
+    font-family: sans-serif;
+}
+
+/* Estilo de los Iconos (Círculos blancos) */
+.footer-socials {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.footer-socials a {
+    background-color: white;
+    color: black;
+    width: 45px;       /* Tamaño del círculo */
+    height: 45px;
+    border-radius: 50%; /* Lo hace redondo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: transform 0.2s;
+}
+
+.footer-socials a:hover {
+    transform: scale(1.1); /* Efecto zoom al tocar */
+}
+
+/* La línea blanca delgada */
+.footer-divider {
+    width: 70%; /* Que no llegue a los bordes */
+    height: 1px;
+    background-color: white;
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+
+/* Texto final */
+.footer-info {
+    font-size: 0.8rem;
+    text-transform: uppercase; /* Todo mayúsculas */
+    opacity: 0.9;
+    margin: 0;
+    line-height: 1.5;
+    font-family: sans-serif;
 }

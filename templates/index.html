@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+   
+    <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MR MEER</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
 </head>
 <body>
 
@@ -142,32 +148,61 @@
         </div>
         <div class="section-ubicacion">
             
-            <h2 class="ubicacion-title">Ubicacion</h2>
-
-            <div class="ubicacion-img-wrapper">
-                <img src="{{ url_for('static', filename='fachada.webp') }}" alt="Fachada Mr Meer Tomé">
+            <div class="ubicacion-header">
+                <h2 class="ubicacion-title">ENCUÉNTRANOS</h2>
+                <div class="yellow-line"></div>
             </div>
 
-            <div class="ubicacion-info">
-                <div class="info-row">
-                    <span class="city-name">Tomé</span>
-                    <span class="open-hours">9:00 AM - 11:30 PM</span>
+            <div class="ubicacion-card">
+                <div class="ubicacion-img-wrapper">
+                    <img src="{{ url_for('static', filename='fachada.webp') }}" alt="Fachada Mr Meer Tomé">
                 </div>
-                <p class="address-text">Nogueira 1015</p>
+
+                <div class="ubicacion-info">
+                    <div class="info-details">
+                        <span class="city-name">TOMÉ</span>
+                        <p class="address-text">Calle Nogueira 1015</p>
+                    </div>
+                    
+                    <div class="schedule-box">
+                        <span class="status-dot"></span>
+                        <span class="open-hours">09:00 AM <br> 11:30 PM</span>
+                    </div>
+                </div>
             </div>
 
-            <hr class="linea-bonita-ubicacion">
+            <a href="https://goo.gl/maps/tuLinkAqui" target="_blank" class="btn-mapa">
+                VER EN MAPA 📍
+            </a>
+            
         </div>
-    
 
-        <div class="footer-links">
-            <a href="https://www.facebook.com/" target="_blank">Facebook</a> |
-            <a href="https://www.instagram.com/" target="_blank">Instagram</a> |
-            <a href="{{ url_for('contacto') }}">Contacto</a>
-        </div>
         
+        <footer class="footer-mrmeer">
+    
+    <div class="footer-logo-container">
+        <h2 class="logo-text"><span style="color:orange">✦</span> MRMEER</h2>
+    </div>
 
-    </div> <script>
+    <div class="footer-socials">
+        <a href="https://www.facebook.com/mrmeer.cl/"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/mrmeer.cl/?hl=es-la"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.tiktok.com/@mrmeer.cl"><i class="fa-brands fa-tiktok"></i></a>
+    </div>
+
+    <div class="footer-divider"></div>
+
+    <p class="footer-info">
+        2018 MR.MEER TOMÉ, REGIÓN DEL BIO-BIO, CHILE.
+    </p>
+
+</footer>
+             
+       
+        </div>
+ 
+
+     <script>
         // --- 1. Menú Overlay ---
         function toggleMenu() {
             var menu = document.getElementById("fullScreenMenu");
@@ -275,4 +310,4 @@
 }
     </script>
 </body>
-</html>
+</html> 
